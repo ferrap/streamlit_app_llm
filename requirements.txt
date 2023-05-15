@@ -4,3 +4,4 @@ gpt-index==0.2.13
 wikipedia==1.4.0
 sqlalchemy==2.0.13
 google-cloud-bigquery==3.10.0
+sqlalchemy-bigquery == 1.6.1
