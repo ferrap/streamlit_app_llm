@@ -44,7 +44,7 @@ llm = OpenAI(temperature=0)
 def build_snowflake_chain():
     engine = create_engine(
         'bigquery://project'
-        )
+        
     )
 
     sql_database = SQLDatabase(engine)
