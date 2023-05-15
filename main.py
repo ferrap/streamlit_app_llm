@@ -14,9 +14,6 @@ from google.cloud import bigquery
 
 open_ai_key = st.secrets['OPENAI_API_KEY']
 
-credentials = service_account.Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"]
-
 # From here down is all the StreamLit UI.
 st.set_page_config(
     page_title="Snowflake + Wikipedia + Langchain Demo", page_icon=":bird:"
