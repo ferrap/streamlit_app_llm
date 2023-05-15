@@ -9,18 +9,13 @@ from langchain.agents import initialize_agent, Tool, load_tools
 from langchain import SQLDatabase, SQLDatabaseChain
 from gpt_index import GPTSimpleVectorIndex, WikipediaReader
 from sqlalchemy import create_engine
+from google.oauth2 import service_account
+from google.cloud import bigquery
 
 open_ai_key = st.secrets['OPENAI_API_KEY']
-#st.write("Secret Key", st.secrets["openai_api_key"])
 
-# And the root-level secrets are also accessible as environment variables:
-
-
-
-#st.write(
-#    "Has environment variables been set:",
-#    os.environ["openai_api_key"] == st.secrets["openai_api_key"],
-#)
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
 
 # From here down is all the StreamLit UI.
 st.set_page_config(
