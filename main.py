@@ -43,8 +43,7 @@ llm = OpenAI(temperature=0)
 @st.experimental_singleton
 def build_snowflake_chain():
     engine = create_engine(
-        "snowflake://{user}:{password}@{account}/{database}/{schema}?warehouse={warehouse}".format(
-            **st.secrets["snowflake"]
+        'bigquery://project'
         )
     )
 
