@@ -16,24 +16,20 @@ open_ai_key = st.secrets['OPENAI_API_KEY']
 
 # From here down is all the StreamLit UI.
 st.set_page_config(
-    page_title="Snowflake + Wikipedia + Langchain Demo", page_icon=":bird:"
+    page_title="BigQuery + Langchain Demo", page_icon=":bird:"
 )
-st.header("Snowflake + Wikipedia + LLM Demo")
+st.header("BigQuery + Langchain Demo")
 st.write(
-    "👋 This is a demo of connecting large language models to external data sources to give it specialized knowledge (e.g. company transaction data) and reduce hallucinations."
+    "👋 This is a demo of connecting large language models to Google BigQuery."
 )
 st.write(
-    "🤖 The chatbot is built with LangChain (agents) and GPT Index (connect to data sources)."
+    "🤖 The chatbot is built with LangChain (agents)."
 )
 
 st.write("Examples you can try:")
-st.write("- What was the average size of transactions in January?")
-st.write("- How much did Bill Gates spend on transactions and where did he grow up?")
-st.write("- What was the largest transaction? Who made that transaction?")
-st.write(
-    "- Who were the celebrities that purchased, and how much did they spend in total?"
-)
-st.write("- Did Bill Gates or Elon Musk spend more relative to their net worth?")
+st.write("- What was the average number of transactions in January?")
+st.write("- What was the highest fee paid?")
+st.write("- What was the lowest fee paid?")
 
 st.sidebar.title("Data Sources")
 
@@ -41,7 +37,7 @@ llm = OpenAI(temperature=0)
 
 # Connect to Snowflake and build the chain
 @st.experimental_singleton
-def build_snowflake_chain():
+def build_bq_chain():
     engine = create_engine(
         'bigquery://silent-vim-249116/wqe', credentials_info=st.secrets['gcp_service_account']
         
@@ -49,7 +45,7 @@ def build_snowflake_chain():
 
     sql_database = SQLDatabase(engine)
 
-    st.sidebar.header("❄️ Snowflake database has been connected")
+    st.sidebar.header("BigQuery database has been connected")
     st.sidebar.write(f"{sql_database.table_info}")
 
     db_chain = SQLDatabaseChain(llm=llm, database=sql_database)
@@ -64,8 +60,8 @@ def build_snowflake_chain():
  #   return GPTSimpleVectorIndex(wiki_docs), pages
 
 
-# Snowflake tool
-db_chain = build_snowflake_chain()
+# BigQuery tool
+db_chain = build_bq_chain()
 
 st.sidebar.write("")
 
@@ -82,9 +78,9 @@ st.sidebar.write("")
 
 tools = [
     Tool(
-        name="Snowflake Transactions",
+        name="BigQuery Transactions",
         func=lambda q: db_chain.run(q),
-        description=f"Useful when you want to answer questions about ETH transaction, gas_price, and date, hour, sec. The input to this tool should be a complete english sentence. ",
+        description=f"Useful when you want to answer questions about ETH transactions, and gas price. The input to this tool should be a complete english sentence. ",
     ),
    # Tool(
         #name="Wiki GPT Index",
