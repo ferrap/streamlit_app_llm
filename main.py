@@ -7,7 +7,6 @@ from langchain.chains.llm_math.base import LLMMathChain
 from langchain.llms import OpenAI
 from langchain.agents import initialize_agent, Tool, load_tools
 from langchain import SQLDatabase, SQLDatabaseChain
-from gpt_index import GPTSimpleVectorIndex, WikipediaReader
 from sqlalchemy import create_engine
 from google.oauth2 import service_account
 from google.cloud import bigquery
