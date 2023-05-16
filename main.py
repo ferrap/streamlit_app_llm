@@ -35,7 +35,7 @@ st.sidebar.title("Data Sources")
 llm = OpenAI(temperature=0)
 
 # Connect to Snowflake and build the chain
-@st.experimental_singleton
+@st.cache_resource
 def build_bq_chain():
     engine = create_engine(
         'bigquery://silent-vim-249116/bigquery-public-data', credentials_info=st.secrets['gcp_service_account']
