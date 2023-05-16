@@ -78,7 +78,7 @@ st.sidebar.write("")
 #index, wiki_pages = build_index(wiki_input)
 
 #if len(wiki_pages) > 0:
-    st.sidebar.write(f"{len(wiki_pages)} articles have been parsed and indexed")
+#    st.sidebar.write(f"{len(wiki_pages)} articles have been parsed and indexed")
 
 tools = [
     Tool(
