@@ -39,7 +39,7 @@ llm = OpenAI(temperature=0)
 @st.experimental_singleton
 def build_bq_chain():
     engine = create_engine(
-        'bigquery://silent-vim-249116/wqe', credentials_info=st.secrets['gcp_service_account']
+        'bigquery://silent-vim-249116/bigquery-public-data', credentials_info=st.secrets['gcp_service_account']
         
     )
 
@@ -52,46 +52,18 @@ def build_bq_chain():
     return db_chain
 
 
-# Parse and Index the Wiki Pages
-#@st.experimental_singleton
-#def build_index(input):
-#    pages = [p.strip() for p in input.split(",") if p != ""]
-#    wiki_docs = WikipediaReader().load_data(pages=pages) if input else []
- #   return GPTSimpleVectorIndex(wiki_docs), pages
+
 
 
 # BigQuery tool
 db_chain = build_bq_chain()
-
-st.sidebar.write("")
-
-# Wiki tool
-#st.sidebar.header("📚 You can also add Wikipedia pages")
-#wiki_input = st.sidebar.text_input(
-#    "Comma-separated Wiki pages: ", placeholder="e.g. Tokyo, Berlin, Rome", key="wiki"
-#)
-
-#index, wiki_pages = build_index(wiki_input)
-
-#if len(wiki_pages) > 0:
-#    st.sidebar.write(f"{len(wiki_pages)} articles have been parsed and indexed")
 
 tools = [
     Tool(
         name="BigQuery Transactions",
         func=lambda q: db_chain.run(q),
         description=f"Useful when you want to answer questions about ETH transactions, and gas price. The input to this tool should be a complete english sentence. ",
-    ),
-   # Tool(
-        #name="Wiki GPT Index",
-        #func=lambda q: str(index.query(q, similarity_top_k=1)),
-        #description=f"Useful when you want to answer general knowledge and trivia questions about notable figures and net worth. If this tool is used, only explicitly pass in what original query is. The input to this tool should be a complete english sentence.",
-   # ),
-   # Tool(
-    #    "Calculator",
-   #     LLMMathChain(llm=llm).run,
-  #      "Useful for when you need to make any math calculations. Use this tool for any and all numerical calculations. The input to this tool should be a mathematical expression.",
-  #  ),
+
 ]
 
 
