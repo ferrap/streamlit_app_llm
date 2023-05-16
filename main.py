@@ -38,7 +38,7 @@ llm = OpenAI(temperature=0)
 @st.experimental_singleton
 def build_bq_chain():
     engine = create_engine(
-        'bigquery://silent-vim-249116', credentials_info=st.secrets['gcp_service_account']
+        'bigquery://silent-vim-249116/bigquery-public-data.crypto_ethereum', credentials_info=st.secrets['gcp_service_account']
         
     )
 
