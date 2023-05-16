@@ -84,7 +84,7 @@ tools = [
     Tool(
         name="Snowflake Transactions",
         func=lambda q: db_chain.run(q),
-        description=f"Useful when you want to answer questions about people's spending, purchases, and transactions. The input to this tool should be a complete english sentence. The celebrities are: Ruth Porat, Bill Gates, Warren Buffet, Elon Musk, Susan Wojcicki.",
+        description=f"Useful when you want to answer questions about ETH transaction, gas_price, and date, hour, sec. The input to this tool should be a complete english sentence. ",
     ),
    # Tool(
         #name="Wiki GPT Index",
