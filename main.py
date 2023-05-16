@@ -43,7 +43,7 @@ llm = OpenAI(temperature=0)
 @st.experimental_singleton
 def build_snowflake_chain():
     engine = create_engine(
-        'bigquery://', credentials_info=st.secrets['gcp_service_account']
+        'bigquery://silent-vim-249116/wqe', credentials_info=st.secrets['gcp_service_account']
         
     )
 
