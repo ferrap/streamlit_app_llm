@@ -38,7 +38,7 @@ llm = OpenAI(temperature=0)
 @st.cache_resource
 def build_bq_chain():
     engine = create_engine(
-        'bigquery://silent-vim-249116/bigquery-public-data', credentials_info=st.secrets['gcp_service_account']
+        'bigquery://silent-vim-249116/wqe', credentials_info=st.secrets['gcp_service_account']
         
     )
 
