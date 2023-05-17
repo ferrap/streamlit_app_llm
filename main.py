@@ -61,7 +61,7 @@ tools = [
     Tool(
         name="BigQuery Transactions",
         func=lambda q: db_chain.run(q),
-        description=f"Useful when you want to answer questions about ETH transactions, and gas price. The input to this tool should be a complete english sentence. ",
+        description=f"Useful when you want to answer questions about ETH transactions, gas price, date, hour, and transaction per sec. Data are in the ETH table. The input to this tool should be a complete english sentence. ",
     )
 ]
 
