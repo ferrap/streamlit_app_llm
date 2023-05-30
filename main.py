@@ -8,8 +8,6 @@ from langchain.llms import OpenAI
 from langchain.agents import initialize_agent, Tool, load_tools
 from langchain import SQLDatabase, SQLDatabaseChain
 from sqlalchemy import create_engine
-from google.oauth2 import service_account
-from google.cloud import bigquery
 
 open_ai_key = st.secrets['OPENAI_API_KEY']
 
